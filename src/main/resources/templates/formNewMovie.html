@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Aggiungi Film</h1>
+    <form th:action="@{/uploadMovie}" method="post" enctype="multipart/form-data">
+        <div>
+            <label>Titolo:</label>
+            <span><input required type="text" th:field="${movie.title}"></span>
+        </div>
+        <div>
+            <label>Anno:</label>
+            <span><input required type="text" th:field="${movie.year}"></span>
+        </div>
+
+        <div>
+            <label>Immagini:</label>
+            <span><input required type="file" name="file" multiple></span>
+        </div>
+
+        <div>
+            <span><button type="submit">Conferma</button></span>
+        </div>
+    </form>
+</body>
+</html>

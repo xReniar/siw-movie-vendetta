@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:if="${movie}">
+        <h1 th:text="${movie.title}">Titolo Film</h1>
+        <div>
+            Anno:<span th:text="'(' + ${movie.year} + ')'">0</span>
+        </div>
+    </div>
+    <ul>
+        <li th:each="picture : ${pictures}">
+            <img th:src="@{'data:image/*;base64,'+${picture.base64Image}}" width="100">
+        </li>
+    </ul>
+    <div th:unless="${movie}">
+        Non Esiste
+    </div>
+</body>
+</html>

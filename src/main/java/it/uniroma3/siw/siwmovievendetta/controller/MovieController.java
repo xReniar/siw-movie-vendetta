@@ -4,7 +4,6 @@ import it.uniroma3.siw.siwmovievendetta.model.Picture;
 import it.uniroma3.siw.siwmovievendetta.model.Movie;
 import it.uniroma3.siw.siwmovievendetta.repository.PictureRepository;
 import it.uniroma3.siw.siwmovievendetta.repository.MovieRepository;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +40,7 @@ public class MovieController {
             pictures.add(picture);
         }
 
-        movie.setImages(pictures);
+        movie.setPictures(pictures);
         this.movieRepository.save(movie);
 
         model.addAttribute("movie",movie);

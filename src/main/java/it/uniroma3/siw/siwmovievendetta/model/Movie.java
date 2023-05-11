@@ -21,8 +21,14 @@ public class Movie {
     @Max(2023)
     private Integer year;
 
-    @ManyToMany()
+    @ManyToMany
     List<Picture> pictures;
+
+    @ManyToOne
+    private Artist director;
+
+    @ManyToMany(mappedBy = "actedMovies")
+    private List<Artist> actors;
 
     public Long getId() {
         return id;
@@ -48,11 +54,27 @@ public class Movie {
         this.year = year;
     }
 
-    public List<Picture> getImages() {
+    public List<Picture> getPictures() {
         return pictures;
     }
 
-    public void setImages(List<Picture> pictures) {
+    public void setPictures(List<Picture> pictures) {
         this.pictures = pictures;
+    }
+
+    public Artist getDirector() {
+        return director;
+    }
+
+    public void setDirector(Artist director) {
+        this.director = director;
+    }
+
+    public List<Artist> getActors() {
+        return actors;
+    }
+
+    public void setActors(List<Artist> actors) {
+        this.actors = actors;
     }
 }

@@ -6,14 +6,19 @@
 </head>
 <body>
     <h1>Aggiungi Film</h1>
-    <form th:action="@{/uploadMovie}" method="post" enctype="multipart/form-data">
+    <form th:action="@{/uploadMovie}" method="post" enctype="multipart/form-data" th:object="${movie}">
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+        </div>
         <div>
             <label>Titolo:</label>
-            <span><input required type="text" th:field="${movie.title}"></span>
+            <span><input type="text" th:field="${movie.title}"></span>
+            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
         </div>
         <div>
             <label>Anno:</label>
             <span><input required type="text" th:field="${movie.year}"></span>
+            <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
         </div>
 
         <div>

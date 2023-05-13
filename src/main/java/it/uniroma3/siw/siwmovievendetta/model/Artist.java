@@ -22,7 +22,7 @@ public class Artist {
     private LocalDate deathDate;
 
     @OneToOne
-    private Picture picture;
+    private Image profilePicture;
 
     @OneToMany(mappedBy = "director")
     private List<Movie> directedMovies;
@@ -70,12 +70,12 @@ public class Artist {
         this.deathDate = deathDate;
     }
 
-    public Picture getPicture() {
-        return picture;
+    public Image getProfilePicture() {
+        return profilePicture;
     }
 
-    public void setPicture(Picture picture) {
-        this.picture = picture;
+    public void setProfilePicture(Image profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
     public List<Movie> getDirectedMovies() {

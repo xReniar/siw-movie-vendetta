@@ -1,7 +1,7 @@
 package it.uniroma3.siw.siwmovievendetta.controller;
 
 import it.uniroma3.siw.siwmovievendetta.controller.validator.MovieValidator;
-import it.uniroma3.siw.siwmovievendetta.model.Picture;
+import it.uniroma3.siw.siwmovievendetta.model.Image;
 import it.uniroma3.siw.siwmovievendetta.model.Movie;
 import it.uniroma3.siw.siwmovievendetta.repository.PictureRepository;
 import it.uniroma3.siw.siwmovievendetta.repository.MovieRepository;
@@ -40,19 +40,19 @@ public class MovieController {
     public String newMovie(Model model, @Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, @RequestParam("file") MultipartFile[] images) throws IOException {
         this.movieValidator.validate(movie,bindingResult);
         if(!bindingResult.hasErrors()){
-            List<Picture> pictures = new ArrayList<>();
+            List<Image> movieImgs = new ArrayList<>();
 
             for(MultipartFile image : images){
-                Picture picture = new Picture(image.getBytes());
+                Image picture = new Image(image.getBytes());
                 this.pictureRepository.save(picture);
-                pictures.add(picture);
+                movieImgs.add(picture);
             }
 
-            movie.setPictures(pictures);
+            movie.setImages(movieImgs);
             this.movieRepository.save(movie);
 
             model.addAttribute("movie",movie);
-            model.addAttribute("pictures",pictures);
+            model.addAttribute("pictures",movieImgs);
             return "movie.html";
         } else {
             return "formNewMovie.html";

@@ -21,7 +21,7 @@ public class Movie {
     private Integer year;
 
     @ManyToMany
-    List<Picture> pictures;
+    List<Image> images;
 
     @ManyToOne
     private Artist director;
@@ -53,12 +53,12 @@ public class Movie {
         this.year = year;
     }
 
-    public List<Picture> getPictures() {
-        return pictures;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setPictures(List<Picture> pictures) {
-        this.pictures = pictures;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     public Artist getDirector() {

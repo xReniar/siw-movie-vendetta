@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Base64;
 
 @Entity
-public class Picture {
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,11 +16,11 @@ public class Picture {
     @Lob
     private String base64Image;
 
-    public Picture(){
+    public Image(){
 
     }
 
-    public Picture(byte[] bytes){
+    public Image(byte[] bytes){
         this.bytes = bytes;
         this.setBase64Image(Base64.getEncoder().encodeToString(this.bytes));
     }

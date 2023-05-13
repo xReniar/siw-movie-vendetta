@@ -20,7 +20,7 @@ public class User {
     private String email;
 
     @OneToOne
-    private Picture profilePicture;
+    private Image profilePicture;
 
     public Long getId() {
         return id;
@@ -54,11 +54,11 @@ public class User {
         this.email = email;
     }
 
-    public Picture getProfilePicture() {
+    public Image getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(Picture profilePicture) {
+    public void setProfilePicture(Image profilePicture) {
         this.profilePicture = profilePicture;
     }
 

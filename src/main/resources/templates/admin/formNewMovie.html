@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Aggiungi Film</h1>
-    <form th:action="@{/uploadMovie}" method="post" enctype="multipart/form-data" th:object="${movie}">
+    <form th:action="@{/admin/uploadMovie}" method="post" enctype="multipart/form-data" th:object="${movie}">
         <div th:if="${#fields.hasGlobalErrors()}">
             <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
         </div>

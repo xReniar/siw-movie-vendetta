@@ -5,7 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-    <!--
     <header>
         <div th:if="${#request.userPrincipal}">
             <span th:text="${#request.userPrincipal.principal.username}"></span>
@@ -15,7 +14,6 @@
             <a href="/login">Login</a>
         </div>
     </header>
-    -->
 
     <h1>Registrazione nuovo utente</h1>
     <form th:action="@{/register}" method="post">

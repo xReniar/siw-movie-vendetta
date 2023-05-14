@@ -24,7 +24,7 @@ public class AuthenticationController {
     public String showRegisterForm (Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("credentials", new Credentials());
-        return "formRegisterUser.html";
+        return "formRegister.html";
     }
 
     @GetMapping(value = "/login")
@@ -33,20 +33,15 @@ public class AuthenticationController {
     }
 
 
-    @GetMapping(value = "/")
+    @GetMapping("/")
     public String index(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication instanceof AnonymousAuthenticationToken) {
             return "loginPage.html";
         }
         else {
-            return "index.html";
+            return "homePage.html";
         }
-    }
-
-    @GetMapping(value = "/success")
-    public String defaultAfterLogin(Model model) {
-        return "index.html";
     }
 
     @PostMapping("/register")
@@ -63,6 +58,6 @@ public class AuthenticationController {
             model.addAttribute("user", user);
             return "formLogin.html";
         }
-        return "formRegisterUser.html";
+        return "formRegister.html";
     }
 }

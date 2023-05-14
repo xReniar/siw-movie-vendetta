@@ -14,6 +14,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
+import static it.uniroma3.siw.siwmovievendetta.model.Credentials.ADMIN_ROLE;
+import static it.uniroma3.siw.siwmovievendetta.model.Credentials.DEFAULT_ROLE;
+
 @Configuration
 @EnableWebSecurity
 public class AuthConfiguration {
@@ -35,13 +38,18 @@ public class AuthConfiguration {
                                 requests
                                         .requestMatchers(HttpMethod.GET, "/login", "/register","/css/**", "/images/**").permitAll()
                                         .requestMatchers(HttpMethod.POST, "/login", "/register","registers").permitAll()
+                                        // solo gli utenti autenticati con ruolo ADMIN possono accedere a risorse con path /admin/**
+                                        .requestMatchers(HttpMethod.GET,"/admin/**").hasAnyAuthority(ADMIN_ROLE)
+                                        .requestMatchers(HttpMethod.POST,"/admin/**").hasAnyAuthority(ADMIN_ROLE)
+                                        .requestMatchers(HttpMethod.GET,"/user/**").hasAnyAuthority(DEFAULT_ROLE)
+                                        .requestMatchers(HttpMethod.POST,"/user/**").hasAnyAuthority(DEFAULT_ROLE)
+
                                         .anyRequest().authenticated()
                                         .and().exceptionHandling().accessDeniedPage("/error");
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
                         }
-                        // solo gli utenti autenticati con ruolo ADMIN possono accedere a risorse con path /admin/**
 
                 )
                 .formLogin((form) -> form

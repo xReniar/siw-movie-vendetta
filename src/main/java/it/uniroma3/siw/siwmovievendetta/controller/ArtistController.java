@@ -12,10 +12,12 @@ public class ArtistController {
     @Autowired
     ArtistRepository artistRepository;
 
-    @GetMapping("/formNewArtist")
+    @GetMapping("/admin/formNewArtist")
     public String newArtist(Model model){
         model.addAttribute("artist",new Artist());
         return "formNewArtist.html";
     }
+
+
 
 }

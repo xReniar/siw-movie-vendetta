@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class AuthenticationController {
     @Autowired
     private CredentialsService credentialsService;
+
+    @GetMapping("/index")
+    public String index(){
+        return "homePage.html";
+    }
 
     @GetMapping(value = "/register")
     public String showRegisterForm (Model model) {
@@ -37,10 +43,16 @@ public class AuthenticationController {
     public String index(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication instanceof AnonymousAuthenticationToken) {
-            return "loginPage.html";
+            return "homePage.html";
         }
         else {
-            return "homePage.html";
+            UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+            if(credentials.getRole().equals(Credentials.ADMIN_ROLE)){
+                return "admin/homePageAdmin.html";
+            } else {
+                return "homePage.html";
+            }
         }
     }
 
@@ -60,4 +72,6 @@ public class AuthenticationController {
         }
         return "formRegister.html";
     }
+
+
 }

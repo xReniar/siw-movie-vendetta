@@ -3,7 +3,7 @@ package it.uniroma3.siw.siwmovievendetta.controller;
 import it.uniroma3.siw.siwmovievendetta.controller.validator.MovieValidator;
 import it.uniroma3.siw.siwmovievendetta.model.Image;
 import it.uniroma3.siw.siwmovievendetta.model.Movie;
-import it.uniroma3.siw.siwmovievendetta.repository.PictureRepository;
+import it.uniroma3.siw.siwmovievendetta.repository.ImageRepository;
 import it.uniroma3.siw.siwmovievendetta.repository.MovieRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import java.util.List;
 public class MovieController {
 
     @Autowired
-    private PictureRepository pictureRepository;
+    private ImageRepository imageRepository;
     @Autowired
     private MovieRepository movieRepository;
     @Autowired
@@ -33,7 +33,7 @@ public class MovieController {
     @GetMapping("/admin/formNewMovie")
     public String newMovie(Model model){
         model.addAttribute("movie",new Movie());
-        return "/admin/formNewMovie.html";
+        return "admin/formNewMovie.html";
     }
 
     @PostMapping("/admin/uploadMovie")
@@ -44,7 +44,7 @@ public class MovieController {
 
             for(MultipartFile image : images){
                 Image picture = new Image(image.getBytes());
-                this.pictureRepository.save(picture);
+                this.imageRepository.save(picture);
                 movieImgs.add(picture);
             }
 

@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ReviewController {
     @GetMapping("/user/formNewReview")
     public String newReview(Model model){
-        model.addAttribute(new Review());
+        //model.addAttribute(new Review());
         return "user/formNewReview.html";
+    }
+
+    @GetMapping("/user/indexUser")
+    public String indexUser(Model model){
+        return "/user/indexUser";
     }
 
 }

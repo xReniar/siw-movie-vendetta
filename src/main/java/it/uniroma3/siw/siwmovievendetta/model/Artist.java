@@ -2,6 +2,7 @@ package it.uniroma3.siw.siwmovievendetta.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,7 +18,6 @@ public class Artist {
     @NotBlank
     private String surname;
 
-    @NotBlank
     private LocalDate birthDate;
     private LocalDate deathDate;
 

@@ -5,9 +5,18 @@
     <title>Title</title>
 </head>
 <body>
+    <header>
+        <div th:if="${userDetails}">
+            <span th:text="${userDetails.username}"></span>
+            <a href="/logout">Logout</a>
+        </div>
+        <div th:unless="${userDetails}">
+            <a href="/login">Login</a>
+        </div>
+    </header>
     <h1>Hello World - index page</h1>
     <ul>
-        <li><a href="/user/formNewReview">Aggiungi Commento</a></li>
+        <li><a href="/user/indexUser">Aggiungi Commento</a></li>
         <li><a href="/user/formNewReview">Aggiungi Commento</a></li>
         <li><a href="/user/formNewReview">Aggiungi Commento</a></li>
     </ul>

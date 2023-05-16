@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <header>
+        <div th:if="${userDetails}">
+            <span th:text="${userDetails.username}"></span>
+            <a href="/logout">Logout</a>
+        </div>
+        <div th:unless="${userDetails}">
+            <a href="/login">Login</a>
+        </div>
+    </header>
+    <div th:if="${artist}">
+        <div>
+            Nome:<span th:text="${artist.name}">.</span>
+        </div>
+        <div>
+            Cognome:<span th:text="${artist.surname}">.</span>
+        </div>
+        <div>
+            <img th:src="@{'data:image/*;base64,'+${picture.base64Image}}" width="100">
+        </div>
+    </div>
+    <div th:unless="${artist}">
+        Non Esiste
+    </div>
+</body>
+</html>

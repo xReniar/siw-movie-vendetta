@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/css/loginPage.css">
 </head>
 <body>
     <!--
@@ -16,25 +17,31 @@
         </div>
     </header>
     -->
-    <h1>Login</h1>
-    <form th:action="@{/login}" method="POST">
+    <div class="loginForm">
         <div>
-            <span>Username:</span>
-            <span><input name="username" type="text" required /></span>
+            <h1>Login</h1>
         </div>
         <div>
-            <span>Password:</span>
-            <span><input name="password" type="password" required /></span>
+            <form th:action="@{/login}" method="POST">
+                <div>
+                    <span>Username:</span>
+                    <span><input name="username" type="text" required /></span>
+                </div>
+                <div>
+                    <span>Password:</span>
+                    <span><input name="password" type="password" required /></span>
+                </div>
+                <div>
+                    <span th:if="${param.error != null}">Username o password errati</span>
+                </div>
+                <div>
+                    <span><button type="submit">Login</button></span>
+                </div>
+            </form>
         </div>
         <div>
-            <span th:if="${param.error != null}">Username o password errati</span>
+            <a th:href="@{/register}" th:text="Registrati">Registrati</a>
         </div>
-        <div>
-            <span><button type="submit">Login</button></span>
-        </div>
-    </form>
-    <div>
-        <a th:href="@{/register}" th:method="get" th:text="Registrati">Registrati</a>
     </div>
 
 </body>

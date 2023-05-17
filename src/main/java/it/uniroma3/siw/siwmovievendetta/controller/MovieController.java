@@ -63,4 +63,10 @@ public class MovieController {
     public String indexMovie(Model model){
         return "admin/indexMovie.html";
     }
+
+    @GetMapping("/movies")
+    public String showAllMovies(Model model){
+        model.addAttribute("movies",this.movieRepository.findAll());
+        return "movies.html";
+    }
 }

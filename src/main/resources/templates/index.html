@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>SiwMovie-Vendetta</title>
+        <meta name="viewport" content="width=device-width,initials-scale=1.0">
+        <link rel="stylesheet" href="/css/base.css">
+        <link rel="stylesheet" href="/css/index.css">
+    </head>
+    <body>
+        <div class="hero">
+            <nav>
+                <h2 class="logo">SiwMovie<span class="vendetta"> Vendetta</span></h2>
+                <ul>
+                    <li><a href="/movies" class="sub">Movies</a></li>
+                    <li><a href="/artists" class="sub">Artists</a></li>
+                </ul>
+                <div th:if="${userDetails}">
+                    <b th:text="${userDetails.username}" class="username"></b>
+                    <button type="button"><a href="/logout">Logout</a></button>
+                </div>
+                <div th:unless="${userDetails}">
+                    <button type="button"><a href="/login">Login</a></button>
+                </div>
+            </nav>
+            <div class="presentation">
+                <h1>Raccolta di film e artisti</h1>
+                <p>Piattaforma dedicata alla raccolta di film e artisti, offrendo agli utenti un'ampia gamma di contenuti cinematografici. Gli utenti potranno scoprire informazioni dettagliate sui film, come cast, recensioni e valutazioni, nonché informazioni sugli artisti coinvolti nella produzione cinematografica.</p>
+            </div>
+        </div>
+    </body>
+</html>

@@ -48,15 +48,16 @@ public class AuthenticationController {
     public String index(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication instanceof AnonymousAuthenticationToken) {
-            return "homePage.html";
+            return "index.html";
         }
         else {
             UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
             if(credentials.getRole().equals(Credentials.ADMIN_ROLE)){
-                return "admin/homePageAdmin.html";
+                //return "admin/homePageAdmin.html";
+                return "index.html";
             } else {
-                return "homePage.html";
+                return "index.html";
             }
         }
     }

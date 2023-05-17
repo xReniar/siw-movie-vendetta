@@ -1,5 +1,105 @@
-.loginForm {
+* {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+
+body {
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(/images/welcomePhoto.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.box {
     display: flex;
+    justify-content: center;
     align-items: center;
+    min-height: 90vh;
+}
+
+.container {
+    width: 350px;
+    display: flex;
     flex-direction: column;
+    padding: 0 15px 0 15px;
+    background: rgba(134, 130, 130, 0.404);
+}
+
+span {
+    color: #fff;
+    font-size: small;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 10px 0;
+}
+
+header {
+    color: #fff;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 10px 0;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    height: 45px;
+    width: 87%;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    padding: 0 0 0 45px;
+    background: rgba(255, 255, 255, 0.1);
+    color:white;
+}
+
+i {
+    position: relative;
+    top: -33px;
+    left: 17px;
+    color: #fff;
+}
+::-webkit-input-placeholder {
+    color: #fff;
+}
+
+.submit {
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    height: 45px;
+    outline: none;
+    width: 75%;
+    background: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.submit:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    font-size: small;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.register {
+    display: flex;
+}
+
+.register a {
+    color: #fff;
+    text-decoration: none;
+    
 }

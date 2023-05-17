@@ -5,6 +5,22 @@
     <title>Title</title>
 </head>
 <body>
-
+    <header>
+        <div th:if="${userDetails}">
+            <span th:text="${userDetails.username}"></span>
+            <a href="/logout">Logout</a>
+        </div>
+        <div th:unless="${userDetails}">
+            <a href="/login">Login</a>
+        </div>
+    </header>
+    <div th:if="${artists.isEmpty()}">
+        Non ci sono artisti nel sistema
+    </div>
+    <ul>
+        <li th:each="artist: ${artists}">
+            <p th:text="${artist.name}">.</p>
+        </li>
+    </ul>
 </body>
 </html>

@@ -60,6 +60,9 @@ public class ArtistController {
         }
     }
 
-
-
+    @GetMapping("/artists")
+    public String showAllArtists(Model model){
+        model.addAttribute("artists",this.artistRepository.findAll());
+        return "artists.html";
+    }
 }

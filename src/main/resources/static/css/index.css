@@ -1,0 +1,11 @@
+.presentation {
+    color: white;
+    width: 50%;
+    padding-top: 10%;
+    padding-left: 10%;
+    font-size: 25px;
+}
+
+.presentation p {
+    font-size: 20px;
+}

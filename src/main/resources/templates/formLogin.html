@@ -5,60 +5,29 @@
     <title>SiwMovie-Vendetta</title>
     <meta name="viewport" content="width=device-width,initials-scale=1.0">
     <link rel="stylesheet" href="/css/loginPage.css">
-    <link rel="stylesheet" href="/css/boxicons.css">
 </head>
 <body>
-    <!--
-        <div class="form">
-        <div>
-            <h1>Login</h1>
-        </div>
-        <div>
-            <form th:action="@{/login}" method="POST">
-                <div>
-                    <span>Username:</span>
-                    <span><input name="username" type="text" required /></span>
-                </div>
-                <div>
-                    <span>Password:</span>
-                    <span><input name="password" type="password" required /></span>
-                </div>
-                <div>
+    <nav>
+        <h2 class="logo">SiwMovie<span class="vendetta"> Vendetta</span></h2>
+    </nav>
+    <section>
+        <div class="form-box">
+            <div class="form-value">
+                <form th:action="@{/login}" method="post" class="form">
+                    <span class="login">Log In</span>
+                    <input type="text" name="username" placeholder="Username" class="form--input">
+                    <input type="password" name="password" placeholder="Password" class="form--input">
                     <span th:if="${param.error != null}">Username o password errati</span>
-                </div>
-                <div>
-                    <span><button type="submit">Login</button></span>
-                </div>
-            </form>
-        </div>
-        <div>
-            <a th:href="@{/register}" th:text="Registrati">Registrati</a>
-        </div>
-    </div>
-    -->
-    <div class="box">
-        <div class="container">
-            <div class="top-header">
-                <header>Login</header>
-            </div>
-            <div class="input-field">
-                <input type="text" class="input" placeholder="Username" required>
-                <i class="bx bx-user"></i>
-            </div>
-            <div class="input-field">
-                <input type="password" class="input" placeholder="Password" required>
-                <i class="bx bx-alt"></i>
-            </div>
-            <div class="input-field">
-                <button><input type="submit" class="submit" value="Login"></button>
-            </div>
-            <div class="bottom">
-                <div class="register">
-                    <span><a href="#">Register</a></span>
-                </div>
+                    <button type="submit" class="form--submit">
+                        Login
+                    </button>
+                    <button class="form--submit">
+                        <a href="/register">Register</a>
+                    </button>
+                </form>
             </div>
         </div>
-    </div>
+    </section>
 
 </body>
 </html>

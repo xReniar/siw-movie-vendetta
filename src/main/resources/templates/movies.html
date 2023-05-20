@@ -2,25 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SiwMovie-Vendetta</title>
+    <meta name="viewport" content="width=device-width,initials-scale=1.0">
+    <link rel="stylesheet" href="/css/movies.css">
 </head>
 <body>
-    <header>
+    <nav>
+        <h2 class="logo">SiwMovie<span class="vendetta"> Vendetta</span></h2>
+        <ul>
+            <li><a href="/" class="sub">Home</a></li>
+            <li><a href="/movies" class="sub">Movies</a></li>
+            <li><a href="/artists" class="sub">Artists</a></li>
+        </ul>
         <div th:if="${userDetails}">
-            <span th:text="${userDetails.username}"></span>
-            <a href="/logout">Logout</a>
+            <b th:text="${userDetails.username}" class="username"></b>
+            <button type="button"><a href="/logout" class="log">Logout</a></button>
         </div>
         <div th:unless="${userDetails}">
-            <a href="/login">Login</a>
+            <button type="button"><a href="/login" class="log">Login</a></button>
         </div>
-    </header>
-    <div th:if="${movies.isEmpty()}">
-        Non ci sono film nel sistema
+    </nav>
+    
+    <div class="content">
+        <div class="second-nav">
+            <h1>Raccolta Film</h1>
+        </div>
+        <div th:if="${movies.isEmpty()}">
+            Non ci sono film nel sistema
+        </div>
+        <div th:unless="${movies.isEmpty()}">
+            <div class="movies">
+                <ul th:each="movie: ${movies}">
+                    <div class="card">
+                        <a th:href="@{'/movie' + '/' + ${movie.id}}">
+                            <img th:src="@{'data:image/*;base64,'+${movie.image.base64Image}}">
+                            <div class="movie-info">
+                                <h4 th:text="${movie.title + ',' + movie.year}">.</h4>
+                            </div>
+                        </a>
+                    </div>
+                </ul>
+            </div>
+        </div>
     </div>
-    <ul>
-        <li th:each="movie: ${movies}">
-            <p th:text="${movie.title}">.</p>
-        </li>
-    </ul>
 </body>
 </html>

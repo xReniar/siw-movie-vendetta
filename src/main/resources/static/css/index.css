@@ -37,11 +37,11 @@ button:hover {
     padding-right: 10px;
 }
 
-#login {
+.log {
     text-decoration: none;
 }
 
-#login:visited {
+.log:visited {
     color:inherit;
 }
 

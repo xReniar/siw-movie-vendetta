@@ -36,7 +36,10 @@ public class AuthConfiguration {
                 .authorizeHttpRequests((requests) -> {
                             try {
                                 requests
-                                        .requestMatchers(HttpMethod.GET,"/index","/", "/login","/register","/movies","/artists","/css/**", "/images/**").permitAll()
+                                        .requestMatchers(HttpMethod.GET,"/index","/", "/login","/register",
+                                                                                    "/movies","/movie/{movieId}",
+                                                                                    "/artists","/artist/{artistId}",
+                                                                                    "/css/**", "/images/**").permitAll()
                                         .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
                                         // solo gli utenti autenticati con ruolo ADMIN possono accedere a risorse con path /admin/**
                                         .requestMatchers(HttpMethod.GET,"/admin/**").hasAnyAuthority(ADMIN_ROLE)

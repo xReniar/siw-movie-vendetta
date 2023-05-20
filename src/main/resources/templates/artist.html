@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>SiwMovie-Vendetta</title>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initials-scale=1.0">
+    <link rel="stylesheet" href="/css/artist.css">
 </head>
 <body>
-    <header>
+    <nav>
+        <h2 class="logo">SiwMovie<span class="vendetta"> Vendetta</span></h2>
+        <ul>
+            <li><a href="/" class="sub">Home</a></li>
+            <li><a href="/movies" class="sub">Movies</a></li>
+            <li><a href="/artists" class="sub">Artists</a></li>
+        </ul>
         <div th:if="${userDetails}">
-            <span th:text="${userDetails.username}"></span>
-            <a href="/logout">Logout</a>
+            <b th:text="${userDetails.username}" class="username"></b>
+            <button type="button"><a href="/logout" class="log">Logout</a></button>
         </div>
         <div th:unless="${userDetails}">
-            <a href="/login">Login</a>
+            <button type="button"><a href="/login" class="log">Login</a></button>
         </div>
-    </header>
-    <div th:if="${artist}">
-        <div>
-            Nome:<span th:text="${artist.name}">.</span>
+    </nav>
+    <div th:if="${artist}" class="content">
+        <div class="card">
+            <img th:src="@{'data:image/*;base64,'+${artist.profilePicture.base64Image}}">
         </div>
-        <div>
-            Cognome:<span th:text="${artist.surname}">.</span>
-        </div>
-        <div>
-            <img th:src="@{'data:image/*;base64,'+${picture.base64Image}}" width="100">
+        <div class="artist-content">
+            <h1 th:text="${artist.name + ' ' + artist.surname}">Artist name and surname</h1>
+            <p th:text="${'Birth date: ' + artist.birthDate}">Artist birthDate</p>
+            <div class="artist-movie-content">
+                
+            </div>
         </div>
     </div>
     <div th:unless="${artist}">

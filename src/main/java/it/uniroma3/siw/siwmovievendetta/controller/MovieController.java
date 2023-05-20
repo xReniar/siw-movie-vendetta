@@ -12,13 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class MovieController {
@@ -37,22 +36,23 @@ public class MovieController {
     }
 
     @PostMapping("/admin/uploadMovie")
-    public String newMovie(Model model, @Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, @RequestParam("file") MultipartFile[] images) throws IOException {
+    public String newMovie(Model model, @Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, @RequestParam("file") MultipartFile image) throws IOException {
         this.movieValidator.validate(movie,bindingResult);
         if(!bindingResult.hasErrors()){
-            List<Image> movieImgs = new ArrayList<>();
-
-            for(MultipartFile image : images){
+            /*
+             for(MultipartFile image : images){
                 Image picture = new Image(image.getBytes());
                 this.imageRepository.save(picture);
                 movieImgs.add(picture);
             }
+             */
+            Image movieImg = new Image(image.getBytes());
+            this.imageRepository.save(movieImg);
 
-            movie.setImages(movieImgs);
+            movie.setImage(movieImg);
             this.movieRepository.save(movie);
 
             model.addAttribute("movie",movie);
-            model.addAttribute("pictures",movieImgs);
             return "movie.html";
         } else {
             return "/admin/formNewMovie.html";
@@ -68,5 +68,11 @@ public class MovieController {
     public String showAllMovies(Model model){
         model.addAttribute("movies",this.movieRepository.findAll());
         return "movies.html";
+    }
+
+    @GetMapping("/movie/{movieId}")
+    public String getMovie(Model model,@PathVariable("movieId") Long id){
+        model.addAttribute("movie", this.movieRepository.findById(id).get());
+        return "movie.html";
     }
 }

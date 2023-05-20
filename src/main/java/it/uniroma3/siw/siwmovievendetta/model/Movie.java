@@ -20,8 +20,8 @@ public class Movie {
     @Max(2023)
     private Integer year;
 
-    @ManyToMany
-    List<Image> images;
+    @OneToOne
+    Image image;
 
     @ManyToOne
     private Artist director;
@@ -53,12 +53,12 @@ public class Movie {
         this.year = year;
     }
 
-    public List<Image> getImages() {
-        return images;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImages(List<Image> images) {
-        this.images = images;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public Artist getDirector() {

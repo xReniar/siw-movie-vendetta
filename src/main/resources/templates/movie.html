@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>SiwMovie-Vendetta</title>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initials-scale=1.0">
+    <link rel="stylesheet" href="/css/movie.css">
 </head>
 <body>
-    <header>
+    <nav>
+        <h2 class="logo">SiwMovie<span class="vendetta"> Vendetta</span></h2>
+        <ul>
+            <li><a href="/" class="sub">Home</a></li>
+            <li><a href="/movies" class="sub">Movies</a></li>
+            <li><a href="/artists" class="sub">Artists</a></li>
+        </ul>
         <div th:if="${userDetails}">
-            <span th:text="${userDetails.username}"></span>
-            <a href="/logout">Logout</a>
+            <b th:text="${userDetails.username}" class="username"></b>
+            <button type="button"><a href="/logout" class="log">Logout</a></button>
         </div>
         <div th:unless="${userDetails}">
-            <a href="/login">Login</a>
+            <button type="button"><a href="/login" class="log">Login</a></button>
         </div>
-    </header>
-    <div th:if="${movie}">
-        <h1 th:text="${movie.title}">Titolo Film</h1>
-        <div>
-            Anno:<span th:text="'(' + ${movie.year} + ')'">0</span>
+    </nav>
+    <div th:if="${movie}" class="content">
+        <div class="card">
+            <img th:src="@{'data:image/*;base64,'+${movie.image.base64Image}}">
+        </div>
+        <div class="movie-content">
+            <h1 th:text="${movie.title}">Movie Title</h1>
+            <p th:text="${movie.year}">Movie Year</p>
+            <div class="movie-cast-content">
+                
+            </div>
         </div>
     </div>
-    <ul>
-        <li th:each="picture : ${pictures}">
-            <img th:src="@{'data:image/*;base64,'+${picture.base64Image}}" width="100">
-        </li>
-    </ul>
     <div th:unless="${movie}">
         Non Esiste
     </div>

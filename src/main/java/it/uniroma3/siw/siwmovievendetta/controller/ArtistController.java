@@ -12,13 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class ArtistController {
@@ -53,7 +52,6 @@ public class ArtistController {
             this.artistRepository.save(artist);
 
             model.addAttribute("artist",artist);
-            model.addAttribute("picture",picture);
             return "artist.html";
         } else {
             return "/admin/formNewArtist.html";
@@ -64,5 +62,11 @@ public class ArtistController {
     public String showAllArtists(Model model){
         model.addAttribute("artists",this.artistRepository.findAll());
         return "artists.html";
+    }
+
+    @GetMapping("/artist/{artistId}")
+    public String getArtist(Model model,@PathVariable("artistId") Long id){
+        model.addAttribute("artist", this.artistRepository.findById(id).get());
+        return "artist.html";
     }
 }

@@ -1,34 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>Aggiungi Film</h1>
-    <form th:action="@{/admin/uploadMovie}" method="post" enctype="multipart/form-data" th:object="${movie}">
-        <div th:if="${#fields.hasGlobalErrors()}">
-            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
-        </div>
-        <div>
-            <label>Titolo:</label>
-            <span><input type="text" th:field="${movie.title}"></span>
-            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
-        </div>
-        <div>
-            <label>Anno:</label>
-            <span><input required type="text" th:field="${movie.year}"></span>
-            <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
-        </div>
+    <head>
+        <title>SiwMovie-Vendetta</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initials-scale=1.0">
+        <link rel="stylesheet" href="/css/common.css">
+        <link rel="stylesheet" href="/css/formAdd.css">
+    </head>
 
-        <div>
-            <label>Immagini:</label>
-            <span><input required type="file" name="file"></span>
-        </div>
+    <body>
+        <nav>
+            <h2 class="logo">SiwMovie<span class="vendetta"> Vendetta</span></h2>
+            <ul>
+                <li><a href="/" class="sub">Home</a></li>
+                <li><a href="/movies" class="sub">Movies</a></li>
+                <li><a href="/artists" class="sub">Artists</a></li>
+            </ul>
+            <div th:if="${userDetails}">
+                <b th:text="${userDetails.username}" class="username"></b>
+                <button type="button"><a href="/logout" class="log">Logout</a></button>
+            </div>
+            <div th:unless="${userDetails}">
+                <button type="button"><a href="/login" class="log">Login</a></button>
+            </div>
+        </nav>
+        <section>
+            <div class="form-box">
+                <div class="form-value">
+                    <form th:action="@{/admin/uploadMovie}" method="post" enctype="multipart/form-data" th:object="${movie}" class="form">
+                        <span class="title">New Movie</span>
+                        <div th:if="${#fields.hasGlobalErrors()}">
+                            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+                        </div>
 
-        <div>
-            <span><button type="submit">Conferma</button></span>
-        </div>
-    </form>
-</body>
+                        <input required type="text" name="title" placeholder="Title" class="form--input">
+                        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+
+                        <input required type="text" name="year" placeholder="Year" class="form--input">
+                        <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
+
+                        <span><input required type="file" name="file"></span>
+                        <button type="submit" class="cssbuttons-io-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg>
+                            <span>Add Movie</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </body>
 </html>

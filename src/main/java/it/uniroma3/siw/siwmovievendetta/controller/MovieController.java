@@ -75,4 +75,20 @@ public class MovieController {
         model.addAttribute("movie", this.movieRepository.findById(id).get());
         return "movie.html";
     }
+
+    @PostMapping("/searchMovie")
+    public String searchMovie(Model model, @RequestParam Integer year){
+        //System.out.println(title);
+        model.addAttribute("movies", this.movieRepository.findByYear(year));
+        return "movies.html";
+    }
+
+    @GetMapping("/movie/{movieId}/modify")
+    public String updateMovie(Model model,@PathVariable("movieId") Long id){
+        Movie movie = this.movieRepository.findById(id).get();
+        model.addAttribute("movie", movie);
+        model.addAttribute("director", movie.getDirector());
+        model.addAttribute("actors",movie.getActors());
+        return "admin/formUpdateMovie.html";
+    }
 }

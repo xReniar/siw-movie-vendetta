@@ -1,0 +1,11 @@
+.content {
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+    display: flex;
+}
+
+.movie-content {
+    color: white;
+    font-size: 30px;
+}

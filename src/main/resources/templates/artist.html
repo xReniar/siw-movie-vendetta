@@ -4,6 +4,7 @@
     <title>SiwMovie-Vendetta</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initials-scale=1.0">
+    <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/artist.css">
 </head>
 <body>
@@ -23,15 +24,21 @@
         </div>
     </nav>
     <div th:if="${artist}" class="content">
-        <div class="card">
-            <img th:src="@{'data:image/*;base64,'+${artist.profilePicture.base64Image}}">
-        </div>
-        <div class="artist-content">
-            <h1 th:text="${artist.name + ' ' + artist.surname}">Artist name and surname</h1>
-            <p th:text="${'Birth date: ' + artist.birthDate}">Artist birthDate</p>
-            <div class="artist-movie-content">
-                
+        <div>
+            <div class="card">
+                <img th:src="@{'data:image/*;base64,'+${artist.profilePicture.base64Image}}">
             </div>
+            <div class="artist-content">
+                <h1 th:text="${artist.name + ' ' + artist.surname}">Artist name and surname</h1>
+                <p th:text="${'Birth date: ' + artist.birthDate}">Artist birthdate</p>
+                <span th:if="${artist.deathDate}">
+                    <p th:text="${'Death date: ' + artist.death}">Artist Deathdate</p>
+                </span>
+            </div>
+        </div>
+        <div class="artist-movie-content">
+            <h1>Directed Movies</h1>
+            <h1>Acted Movies</h1>
         </div>
     </div>
     <div th:unless="${artist}">

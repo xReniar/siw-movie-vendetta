@@ -37,8 +37,8 @@ public class AuthConfiguration {
                             try {
                                 requests
                                         .requestMatchers(HttpMethod.GET,"/index","/", "/login","/register",
-                                                                                    "/movies","/movie/{movieId}","/movie/{movieId}/modify",
-                                                                                    "/artists","/artist/{artistId}",
+                                                                                    "/movies","/movie/{movieId}","/searchMovie",
+                                                                                    "/artists","/artists/{artistId}",
                                                                                     "/css/**", "/images/**").permitAll()
                                         .requestMatchers(HttpMethod.POST, "/login", "/register","/searchMovie").permitAll()
                                         // solo gli utenti autenticati con ruolo ADMIN possono accedere a risorse con path /admin/**

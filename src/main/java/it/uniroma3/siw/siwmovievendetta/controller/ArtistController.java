@@ -64,7 +64,7 @@ public class ArtistController {
         return "artists.html";
     }
 
-    @GetMapping("/artist/{artistId}")
+    @GetMapping("/artists/{artistId}")
     public String getArtist(Model model,@PathVariable("artistId") Long id){
         model.addAttribute("artist", this.artistRepository.findById(id).get());
         return "artist.html";

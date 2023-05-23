@@ -23,10 +23,10 @@ public class Movie {
     @OneToOne
     Image image;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Artist director;
 
-    @ManyToMany(mappedBy = "actedMovies")
+    @ManyToMany(mappedBy = "actedMovies", fetch = FetchType.LAZY)
     private List<Artist> actors;
 
     public Long getId() {

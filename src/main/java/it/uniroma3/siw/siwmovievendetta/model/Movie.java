@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Movie {
@@ -27,7 +28,7 @@ public class Movie {
     private Artist director;
 
     @ManyToMany(mappedBy = "actedMovies", fetch = FetchType.LAZY)
-    private List<Artist> actors;
+    private Set<Artist> actors;
 
     public Long getId() {
         return id;
@@ -69,11 +70,11 @@ public class Movie {
         this.director = director;
     }
 
-    public List<Artist> getActors() {
+    public Set<Artist> getActors() {
         return actors;
     }
 
-    public void setActors(List<Artist> actors) {
+    public void setActors(Set<Artist> actors) {
         this.actors = actors;
     }
 }

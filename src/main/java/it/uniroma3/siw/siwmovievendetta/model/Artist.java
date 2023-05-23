@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 import java.util.Objects;
 
 @Entity
@@ -25,10 +25,10 @@ public class Artist {
     private Image profilePicture;
 
     @OneToMany(mappedBy = "director",fetch = FetchType.LAZY)
-    private List<Movie> directedMovies;
+    private Set<Movie> directedMovies;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Movie> actedMovies;
+    private Set<Movie> actedMovies;
 
     public Long getId() {
         return id;
@@ -78,19 +78,19 @@ public class Artist {
         this.profilePicture = profilePicture;
     }
 
-    public List<Movie> getDirectedMovies() {
+    public Set<Movie> getDirectedMovies() {
         return directedMovies;
     }
 
-    public void setDirectedMovies(List<Movie> directedMovies) {
+    public void setDirectedMovies(Set<Movie> directedMovies) {
         this.directedMovies = directedMovies;
     }
 
-    public List<Movie> getActedMovies() {
+    public Set<Movie> getActedMovies() {
         return actedMovies;
     }
 
-    public void setActedMovies(List<Movie> actedMovies) {
+    public void setActedMovies(Set<Movie> actedMovies) {
         this.actedMovies = actedMovies;
     }
 

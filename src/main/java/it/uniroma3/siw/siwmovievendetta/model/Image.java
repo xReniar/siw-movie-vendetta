@@ -10,8 +10,10 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    /*
     @Lob
     private byte[] bytes;
+     */
 
     @Lob
     private String base64Image;
@@ -21,8 +23,7 @@ public class Image {
     }
 
     public Image(byte[] bytes){
-        this.bytes = bytes;
-        this.setBase64Image(Base64.getEncoder().encodeToString(this.bytes));
+        this.setBase64Image(Base64.getEncoder().encodeToString(bytes));
     }
 
     public Long getId() {
@@ -33,6 +34,7 @@ public class Image {
         this.id = id;
     }
 
+    /*
     public byte[] getBytes() {
         return bytes;
     }
@@ -40,6 +42,7 @@ public class Image {
     public void setBytes(byte[] bytes) {
         this.bytes = bytes;
     }
+     */
 
     public String getBase64Image() {
         return base64Image;

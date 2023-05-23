@@ -37,7 +37,7 @@ public class AuthConfiguration {
                             try {
                                 requests
                                         .requestMatchers(HttpMethod.GET,"/index","/", "/login","/register",
-                                                                                    "/movies","/movie/{movieId}","/searchMovie",
+                                                                                    "/movies","/movies/{movieId}","/searchMovie",
                                                                                     "/artists","/artists/{artistId}",
                                                                                     "/css/**", "/images/**").permitAll()
                                         .requestMatchers(HttpMethod.POST, "/login", "/register","/searchMovie").permitAll()

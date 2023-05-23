@@ -39,7 +39,7 @@
             <div class="movies">
                 <ul th:each="movie: ${movies}">
                     <div class="card">
-                        <a th:href="@{'/movie' + '/' + ${movie.id}}">
+                        <a th:href="@{'/movies' + '/' + ${movie.id}}">
                             <img th:src="@{'data:image/*;base64,'+${movie.image.base64Image}}">
                             <div class="movie-info">
                                 <h4 th:text="${movie.title + ',' + movie.year}">.</h4>

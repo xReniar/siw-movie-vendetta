@@ -66,7 +66,11 @@ public class ArtistController {
 
     @GetMapping("/artists/{artistId}")
     public String getArtist(Model model,@PathVariable("artistId") Long id){
+        Artist artist = this.artistRepository.findById(id).get();
         model.addAttribute("artist", this.artistRepository.findById(id).get());
+
+        model.addAttribute("directed", artist.getDirectedMovies());
+        model.addAttribute("acted", artist.getActedMovies());
         return "artist.html";
     }
 }

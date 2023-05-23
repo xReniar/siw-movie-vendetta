@@ -2,6 +2,7 @@
     margin-top: 2%;
     margin-left: 10%;
     margin-right: 10%;
+    margin-bottom: 2%;
     display: flex;
 }
 
@@ -57,8 +58,8 @@
 .movie-review-content {
     color: white;
     margin-left: 10%;
+    margin-right: 10%;
     font-size: 20px;
-    padding-top: 2%;
 }
 
 .update-movie {

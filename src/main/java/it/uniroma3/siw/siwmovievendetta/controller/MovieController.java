@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -85,9 +84,12 @@ public class MovieController {
         model.addAttribute("movie",movie);
 
         Set<Artist> cast = movie.getActors();
-        cast.add(movie.getDirector());
+        if(movie.getDirector() != null){
+            cast.add(movie.getDirector());
+        }
 
         model.addAttribute("cast", cast);
+        model.addAttribute("director", movie.getDirector());
 
         return "movie.html";
     }

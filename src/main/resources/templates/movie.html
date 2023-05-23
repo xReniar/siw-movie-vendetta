@@ -35,18 +35,26 @@
             </button>
             <div class="movie-cast-content">
                 <h1>Cast:</h1>
-                <h3 th:if="${movie.director}">(Director: <span th:text="${movie.director.name + ' ' + movie.director.surname}"></span>)</h3>
-                <div class="artists" th:unless="${cast.isEmpty()}">
-                    <ul th:each="artist : ${cast}">
-                        <div class="cards">
-                            <a th:href="@{'/artists' + '/' + ${artist.id}}">
-                                <img th:src="@{'data:image/*;base64,'+${artist.profilePicture.base64Image}}">
-                                <div class="artist-info">
-                                    <h4 th:text="${artist.name + ' ' + artist.surname}">.</h4>
-                                </div>
-                            </a>
-                        </div>
-                    </ul>
+                <div th:if="${cast.isEmpty()}">
+                    None
+                </div>
+                <div th:unless="${cast.isEmpty()}">
+                    <div th:if="${director}">
+                        <h4>Director:</h4>
+                        <span th:text="${director.name + ' ' + director.surname}">.</span>
+                    </div>
+                    <div class="artists">
+                        <ul th:each="artist : ${cast}">
+                            <div class="cards">
+                                <a th:href="@{'/artists' + '/' + ${artist.id}}">
+                                    <img th:src="@{'data:image/*;base64,'+${artist.profilePicture.base64Image}}">
+                                    <div class="artist-info">
+                                        <h4 th:text="${artist.name + ' ' + artist.surname}">.</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

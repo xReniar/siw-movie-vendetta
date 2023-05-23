@@ -28,6 +28,9 @@
     <div th:if="${movie}" class="content">
         <div class="movie-content">
             <h1 th:text="${movie.title + ',' + movie.year}">Movie Title</h1>
+            <button type="button">
+                <a th:href="'/movies/'+${movie.id}" class="log">Go back to Movie</a>
+            </button>
             <div class="movie-cast">
                 <div class="label">
                     <div class="main-label">

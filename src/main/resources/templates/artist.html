@@ -37,8 +37,36 @@
             </div>
         </div>
         <div class="artist-movie-content">
-            <h1>Directed Movies</h1>
-            <h1>Acted Movies</h1>
+            <div class="directed-content">
+                <h1>Directed Movies</h1>
+                <div class="movies">
+                    <ul th:each="movie : ${directed}">
+                        <div class="cards">
+                            <a th:href="@{'/movies' + '/' + ${movie.id}}">
+                                <img th:src="@{'data:image/*;base64,'+${movie.image.base64Image}}">
+                                <div class="movie-info">
+                                    <h4 th:text="${movie.title + ',' + movie.year}">.</h4>
+                                </div>
+                            </a>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="acted-content">
+                <h1>Acted Movies</h1>
+                <div class="movies">
+                    <ul th:each="movie : ${acted}">
+                        <div class="cards">
+                            <a th:href="@{'/movies' + '/' + ${movie.id}}">
+                                <img th:src="@{'data:image/*;base64,'+${movie.image.base64Image}}">
+                                <div class="movie-info">
+                                    <h4 th:text="${movie.title + ',' + movie.year}">.</h4>
+                                </div>
+                            </a>
+                        </div>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <div th:unless="${artist}">

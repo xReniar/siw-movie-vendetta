@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>SiwMovie-Vendetta</title>
     <meta charset="UTF-8">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/updateMovie.css">
 </head>
+
 <body>
     <nav>
         <h2 class="logo">SiwMovie<span class="vendetta"> Vendetta</span></h2>
@@ -25,23 +27,71 @@
     </nav>
     <div th:if="${movie}" class="content">
         <div class="movie-content">
-            <h1 th:text="${movie.title}">Movie Title</h1>
-            <div th:if="${director}" class="">
-                <h3>Director: <span th:text="${director.name + ' ' + director.surname}">Director name</span></h3>
-            </div>
-            <div th:unless="${director}" class="">
-                <h3>Director: None</h3>
-            </div>
-            <div>
-                <h3 th:if="${actors}">Actors:</h3>
-                <h3 th:unless="${actors}">Actors: None</h3>
-                <ul>
-                    <li th:each="actor : ${actors}">
-                        <span th:text="${actor.name} + ' ' + ${actor.surname}">.</span>
-                    </li>
-                </ul>
+            <h1 th:text="${movie.title + ',' + movie.year}">Movie Title</h1>
+            <div class="movie-cast">
+                <div class="label">
+                    <div class="main-label">
+                        <h3>Director:</h3>
+                        <button type="button">
+                            <a th:href="'/admin/manage/updateDirector/'+${movie.id}" class="log">Update</a>
+                        </button>
+                    </div>
+                    <div th:if="${director}" class="director-content">
+                        <div class="card">
+                            <a th:href="@{'/artists' + '/' + ${director.id}}">
+                                <img th:src="@{'data:image/*;base64,'+${director.profilePicture.base64Image}}">
+                                <div class="card-overlay">
+                                    <button class="overlay-button">
+                                        <a th:href="@{'/admin/manage/removeDirector/' + ${movie.id} + '/' + ${director.id}}" class="log">
+                                            remove
+                                        </a>
+                                    </button>
+                                  </div>
+                                <div class="artist-info">
+                                    <h4 th:text="${director.name + ' ' + director.surname}">.</h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div th:unless="${director}" class="director-content">
+                        <h4>Nessun direttore</h4>
+                    </div>
+                </div>
+                <div class="label">
+                    <div class="main-label">
+                        <h3>Actors:</h3>
+                        <button type="button">
+                            <a th:href="'/admin/manage/addActor/'+${movie.id}" class="log">Update</a>
+                        </button>
+                    </div>
+                    <div th:if="${actors.isEmpty()}" class="actors-content">
+                        <h4>Nessun attore</h4>
+                    </div>
+                    <div th:unless="${actors.isEmpty()}" class="actors-content">
+                        <div class="artists">
+                            <ul th:each="artist: ${actors}">
+                                <div class="card">
+                                    <a th:href="@{'/artists' + '/' + ${artist.id}}">
+                                        <img th:src="@{'data:image/*;base64,'+${artist.profilePicture.base64Image}}">
+                                        <div class="card-overlay">
+                                            <button class="overlay-button">
+                                                <a th:href="@{'/admin/manage/removeActor/' + ${movie.id} + '/' + ${artist.id}}" class="log">
+                                                    remove
+                                                </a>
+                                            </button>
+                                          </div>
+                                        <div class="artist-info">
+                                            <h4 th:text="${artist.name + ' ' + artist.surname}">.</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>

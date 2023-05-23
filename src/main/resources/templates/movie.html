@@ -31,7 +31,7 @@
             <h1 th:text="${movie.title}">Movie Title</h1>
             <p th:text="${movie.year}">Movie Year</p>
             <button th:if="${role != null && role == 'ADMIN'}" class="update-movie">
-                <a th:href="'/movie/' + ${movie.id} + '/modify'" class="log">Update Movie</a>
+                <a th:href="'/admin/manage/' + ${movie.id}" class="log">Update Movie</a>
             </button>
             <div class="movie-cast-content">
                 <h1>Cast</h1>

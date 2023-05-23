@@ -38,7 +38,7 @@
             <div class="artists">
                 <ul th:each="artist: ${artists}">
                     <div class="card">
-                        <a th:href="@{'/artist' + '/' + ${artist.id}}">
+                        <a th:href="@{'/artists' + '/' + ${artist.id}}">
                             <img th:src="@{'data:image/*;base64,'+${artist.profilePicture.base64Image}}">
                             <div class="artist-info">
                                 <h4 th:text="${artist.name + ' ' + artist.surname}">.</h4>

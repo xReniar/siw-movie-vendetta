@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Artist {
@@ -23,10 +24,10 @@ public class Artist {
     @OneToOne
     private Image profilePicture;
 
-    @OneToMany(mappedBy = "director")
+    @OneToMany(mappedBy = "director",fetch = FetchType.LAZY)
     private List<Movie> directedMovies;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Movie> actedMovies;
 
     public Long getId() {
@@ -91,5 +92,18 @@ public class Artist {
 
     public void setActedMovies(List<Movie> actedMovies) {
         this.actedMovies = actedMovies;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Artist artist = (Artist) o;
+        return Objects.equals(id, artist.id) && Objects.equals(name, artist.name) && Objects.equals(surname, artist.surname) && Objects.equals(birthDate, artist.birthDate) && Objects.equals(deathDate, artist.deathDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname, birthDate, deathDate);
     }
 }

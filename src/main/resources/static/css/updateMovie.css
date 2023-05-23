@@ -47,7 +47,7 @@
 .artists {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.7em;
+    gap: 1em;
 }
 
 .card {
@@ -78,6 +78,7 @@
     box-sizing: border-box;
     display: flex;
     justify-content: center;
+    font-size:15px;
 }
 
 .log {
@@ -100,20 +101,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  .card:hover .card-overlay {
+}
+
+.card:hover .card-overlay {
     visibility: visible;
     opacity: 1;
-    z-index: 1; /* Ensure the overlay is on top */
-  }
-  
-  .overlay-button {
+    z-index: 1;
+    /* Ensure the overlay is on top */
+}
+
+.overlay-button {
     position: absolute;
     background-color: #ed0606;
     color: #fff;
     border: none;
     font-size: 16px;
     cursor: pointer;
-    z-index: 2; /* Ensure the button is on top of the overlay */
-  }
+    z-index: 2;
+    /* Ensure the button is on top of the overlay */
+}

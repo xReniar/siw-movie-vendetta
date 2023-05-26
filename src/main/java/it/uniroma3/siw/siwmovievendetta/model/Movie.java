@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,6 +28,9 @@ public class Movie {
 
     @ManyToMany(mappedBy = "actedMovies", fetch = FetchType.LAZY)
     private Set<Artist> actors;
+
+    @OneToMany
+    private Set<Review> reviews;
 
     public Long getId() {
         return id;
@@ -76,5 +78,13 @@ public class Movie {
 
     public void setActors(Set<Artist> actors) {
         this.actors = actors;
+    }
+
+    public Set<Review> getReviews(){
+        return reviews;
+    }
+
+    public void setReviews(Set<Review> reviews){
+        this.reviews = reviews;
     }
 }

@@ -19,9 +19,6 @@ public class User {
     @NotBlank
     private String email;
 
-    @OneToOne
-    private Image profilePicture;
-
     public Long getId() {
         return id;
     }
@@ -54,24 +51,19 @@ public class User {
         this.email = email;
     }
 
-    public Image getProfilePicture() {
-        return profilePicture;
-    }
-
-    public void setProfilePicture(Image profilePicture) {
-        this.profilePicture = profilePicture;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(email, user.email) && Objects.equals(profilePicture, user.profilePicture);
+        return Objects.equals(id, user.id) && 
+               Objects.equals(name, user.name) && 
+               Objects.equals(surname, user.surname) && 
+               Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, email, profilePicture);
+        return Objects.hash(id, name, surname, email);
     }
 }

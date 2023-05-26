@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width,initials-scale=1.0">
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/updateDirector.css">
+    <link rel="icon" href="/images/favicon.ico">
 </head>
 
 <body>
@@ -31,7 +32,8 @@
             <ul th:each="artist: ${choices}">
                 <div class="card">
                     <a th:href="@{'/admin/manage/setDirector/' + ${movie.id} + '/' + ${artist.id}}">
-                        <img th:src="@{'data:image/*;base64,'+${artist.profilePicture.base64Image}}">
+                        <!--<img th:src="@{'data:image/*;base64,'+${artist.profilePicture.base64Image}}">-->
+                        <img th:src="@{'/display/image/' + ${artist.profilePicture.id}}">
                         <div class="artist-info">
                             <h4 th:text="${artist.name + ' ' + artist.surname}">.</h4>
                         </div>

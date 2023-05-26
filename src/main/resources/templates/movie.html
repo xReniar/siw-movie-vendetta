@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>SiwMovie-Vendetta</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initials-scale=1.0">
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/movie.css">
+    <link rel="icon" href="/images/favicon.ico">
 </head>
+
 <body>
     <nav>
         <h2 class="logo">SiwMovie<span class="vendetta"> Vendetta</span></h2>
@@ -25,7 +28,8 @@
     </nav>
     <div th:if="${movie}" class="content">
         <div class="card">
-            <img th:src="@{'data:image/*;base64,'+${movie.image.base64Image}}">
+            <img th:src="@{'/display/image/' + ${movie.image.id}}">
+            <!--<img th:src="@{'data:image/*;base64,'+${movie.image.base64Image}}">-->
         </div>
         <div class="movie-content">
             <h1 th:text="${movie.title}">Movie Title</h1>
@@ -35,19 +39,19 @@
             </button>
             <div class="movie-cast-content">
                 <h1>Cast:</h1>
-                <div th:if="${cast.isEmpty()}">
+                <div th:if="${movieCast.isEmpty()}">
                     None
                 </div>
-                <div th:unless="${cast.isEmpty()}">
+                <div th:unless="${movieCast.isEmpty()}">
                     <div th:if="${director}">
-                        <h4>Director:</h4>
-                        <span th:text="${director.name + ' ' + director.surname}">.</span>
+                        <h4>Director:<span th:text="${director.name + ' ' + director.surname}">.</span></h4>
                     </div>
                     <div class="artists">
-                        <ul th:each="artist : ${cast}">
+                        <ul th:each="artist : ${movieCast}">
                             <div class="cards">
                                 <a th:href="@{'/artists' + '/' + ${artist.id}}">
-                                    <img th:src="@{'data:image/*;base64,'+${artist.profilePicture.base64Image}}">
+                                    <!--<img th:src="@{'data:image/*;base64,'+${artist.profilePicture.base64Image}}">-->
+                                    <img th:src="@{'/display/image/' + ${artist.profilePicture.id}}">
                                     <div class="artist-info">
                                         <h4 th:text="${artist.name + ' ' + artist.surname}">.</h4>
                                     </div>
@@ -59,8 +63,53 @@
             </div>
         </div>
     </div>
-    <div th:if="${movie}" class="movie-review-content">
-        <h1>Reviews</h1>
+    <div th:if="${userDetails}" class="movie-review-content">
+        <div class="personal-review" th:unless="${hasComment}">
+            <form th:action="@{'/user/uploadReview/' + ${movie.id}}" method="post" th:object="${review}" class="form">
+                <input required type="text" placeholder="Title" name="title" th:field="${review.title}" class="form--input1">
+                <input required type="text" placeholder="Text" name="text" th:field="${review.text}" class="form--input2">
+                <div class="review-options">
+                    <input required type="number" min="1" max="5" name="rating" th:field="${review.rating}" id="animated-input">
+                    <button class="comment-button" type="submit">Commenta</button>
+                </div>
+            </form>
+        </div>
     </div>
+    <div>
+        <div th:if="${reviews}">
+            <div th:unless="${reviews.isEmpty()}" class="other-review">
+                <h1 style="padding-top: 2%; font-size: 40px;">Recensioni</h1>
+                <ul th:each="rev : ${reviews}">
+                    <div class="review">
+                        <div class="header">
+                            <h1 th:text="${rev.title}">.</h1>
+                            <h1 th:text="${rev.author}">.</h1>
+                        </div>
+                        <p th:text="${rev.text}">.</p>
+                        <div class="bottom-label">
+                            <p th:text="'Rating: ' + ${rev.rating}">.</p>
+                            <button th:if="${role != null && role == 'ADMIN'}" class="delete-review">
+                                <a th:href="'/user/deleteReview/' + ${movie.id} + '/' + ${rev.id}" class="log">
+                                    Delete
+                                </a>
+                            </button>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        const input = document.getElementById('animated-input');
+
+        input.addEventListener('input', function () {
+            if (input.checkValidity()) {
+                input.classList.remove('animated');
+            } else {
+                input.classList.add('animated');
+            }
+        });
+    </script>
 </body>
+
 </html>

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initials-scale=1.0">
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/movies.css">
+    <link rel="icon" href="/images/favicon.ico">
 </head>
 <body>
     <nav>
@@ -40,7 +41,8 @@
                 <ul th:each="movie: ${movies}">
                     <div class="card">
                         <a th:href="@{'/movies' + '/' + ${movie.id}}">
-                            <img th:src="@{'data:image/*;base64,'+${movie.image.base64Image}}">
+                            <img th:src="@{'/display/image/' + ${movie.image.id}}">
+                            <!--<img th:src="@{'data:image/*;base64,'+${movie.image.base64Image}}">-->
                             <div class="movie-info">
                                 <h4 th:text="${movie.title + ',' + movie.year}">.</h4>
                             </div>

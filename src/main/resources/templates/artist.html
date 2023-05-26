@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initials-scale=1.0">
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/artist.css">
+    <link rel="icon" href="/images/favicon.ico">
 </head>
 <body>
     <nav>
@@ -26,7 +27,8 @@
     <div th:if="${artist}" class="content">
         <div>
             <div class="card">
-                <img th:src="@{'data:image/*;base64,'+${artist.profilePicture.base64Image}}">
+                <img th:src="@{'/display/image/' + ${artist.profilePicture.id}}">
+                <!--<img th:src="@{'data:image/*;base64,'+${artist.profilePicture.base64Image}}">-->
             </div>
             <div class="artist-content">
                 <h1 th:text="${artist.name + ' ' + artist.surname}">Artist name and surname</h1>
@@ -43,7 +45,8 @@
                     <ul th:each="movie : ${directed}">
                         <div class="cards">
                             <a th:href="@{'/movies' + '/' + ${movie.id}}">
-                                <img th:src="@{'data:image/*;base64,'+${movie.image.base64Image}}">
+                                <!--<img th:src="@{'data:image/*;base64,'+${movie.image.base64Image}}">-->
+                                <img th:src="@{'/display/image/' + ${movie.image.id}}">
                                 <div class="movie-info">
                                     <h4 th:text="${movie.title + ',' + movie.year}">.</h4>
                                 </div>
@@ -58,7 +61,8 @@
                     <ul th:each="movie : ${acted}">
                         <div class="cards">
                             <a th:href="@{'/movies' + '/' + ${movie.id}}">
-                                <img th:src="@{'data:image/*;base64,'+${movie.image.base64Image}}">
+                                <!--<img th:src="@{'data:image/*;base64,'+${movie.image.base64Image}}">-->
+                                <img th:src="@{'/display/image/' + ${movie.image.id}}">
                                 <div class="movie-info">
                                     <h4 th:text="${movie.title + ',' + movie.year}">.</h4>
                                 </div>

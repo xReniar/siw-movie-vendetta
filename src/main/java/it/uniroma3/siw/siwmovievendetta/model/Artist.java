@@ -5,6 +5,9 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
 import java.util.Set;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Objects;
 
 @Entity
@@ -18,7 +21,9 @@ public class Artist {
     @NotBlank
     private String surname;
 
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthDate;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate deathDate;
 
     @OneToOne

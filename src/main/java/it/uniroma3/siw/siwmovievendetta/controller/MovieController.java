@@ -9,7 +9,6 @@ import it.uniroma3.siw.siwmovievendetta.repository.MovieRepository;
 import it.uniroma3.siw.siwmovievendetta.service.MovieService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 @Controller
 public class MovieController {
@@ -64,31 +61,7 @@ public class MovieController {
              */
 
             this.movieService.createMovie(movie, image);
-
-            Set<Artist> movieCast = new HashSet<>();
-            if (movie.getActors() != null) {
-                movieCast.addAll(movie.getActors());
-            }
-            if (movie.getDirector() != null) {
-                movieCast.add(movie.getDirector());
-            }
-
-            model.addAttribute("movieCast", movieCast);
-            model.addAttribute("movie", movie);
-            UserDetails user = this.globalController.getUser();
-            if (user != null) {
-                if (this.movieService.alreadyReviewed(movie.getReviews(),user.getUsername())) {
-                    model.addAttribute("hasComment", true);
-                } else {
-                    model.addAttribute("hasComment", false);
-                }
-                model.addAttribute("review", new Review());
-            } else {
-                model.addAttribute("hasComment", false);
-                model.addAttribute("review", new Review());
-            }
-            model.addAttribute("reviews", movie.getReviews());
-            return "movie.html";
+            return this.movieService.function(model, movie, globalController.getUser());
         } else {
             return "/admin/formNewMovie.html";
         }
@@ -108,32 +81,8 @@ public class MovieController {
     @GetMapping("/movies/{movieId}")
     public String getMovie(Model model, @PathVariable("movieId") Long id) {
         Movie movie = this.movieRepository.findById(id).get();
-        model.addAttribute("movie", movie);
 
-        Set<Artist> movieCast = new HashSet<>();
-        if (movie.getActors() != null) {
-            movieCast.addAll(movie.getActors());
-        }
-        if (movie.getDirector() != null) {
-            movieCast.add(movie.getDirector());
-        }
-        model.addAttribute("movieCast", movieCast);
-        model.addAttribute("director", movie.getDirector());
-
-        UserDetails user = this.globalController.getUser();
-        if (user != null) {
-            if (this.movieService.alreadyReviewed(movie.getReviews(),user.getUsername())) {
-                model.addAttribute("hasComment", true);
-            } else {
-                model.addAttribute("hasComment", false);
-            }
-            model.addAttribute("review", new Review());
-        } else {
-            model.addAttribute("hasComment", false);
-            model.addAttribute("review", new Review());
-        }
-        model.addAttribute("reviews", movie.getReviews());
-        return "movie.html";
+        return this.movieService.function(model, movie, globalController.getUser());
     }
 
     @PostMapping("/searchMovie")

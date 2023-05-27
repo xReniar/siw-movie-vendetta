@@ -1,11 +1,14 @@
 package it.uniroma3.siw.siwmovievendetta.service;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.siwmovievendetta.model.Movie;
@@ -86,15 +89,30 @@ public class MovieService {
         this.movieRepository.save(movie);
     }
 
+    public String function(Model model,Movie movie,UserDetails user){
+        Set<Artist> movieCast = new HashSet<>();
+        if(movie.getActors() != null)
+            movieCast.addAll(movie.getActors());
+        movieCast.add(movie.getDirector());
+        movieCast.remove(null);
+        model.addAttribute("movieCast", movieCast);
+        model.addAttribute("movie", movie);
+        model.addAttribute("director", movie.getDirector());
+        if(user != null && this.alreadyReviewed(movie.getReviews(),user.getUsername()))
+            model.addAttribute("hasComment", true);
+        else
+            model.addAttribute("hasComment", false);
+        model.addAttribute("review", new Review());
+        model.addAttribute("reviews", movie.getReviews());
+        return "movie.html";
+    }
+
     @Transactional
     public boolean alreadyReviewed(Set<Review> reviews,String author){
-        if(reviews != null){
-            for(Review rev : reviews){
-                if(rev.getAuthor().equals(author)){
+        if(reviews != null)
+            for(Review rev : reviews)
+                if(rev.getAuthor().equals(author))
                     return true;
-                }
-            }
-        }
         return false;
     }
 }

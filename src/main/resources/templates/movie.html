@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-    <div th:if="${userDetails}" class="movie-review-content">
+    <div class="movie-review-content">
         <div class="personal-review" th:unless="${hasComment}">
             <form th:action="@{'/user/uploadReview/' + ${movie.id}}" method="post" th:object="${review}" class="form">
                 <input required type="text" placeholder="Title" name="title" th:field="${review.title}" class="form--input1">

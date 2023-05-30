@@ -3,7 +3,6 @@ package it.uniroma3.siw.siwmovievendetta.controller;
 import it.uniroma3.siw.siwmovievendetta.controller.validator.MovieValidator;
 import it.uniroma3.siw.siwmovievendetta.model.Artist;
 import it.uniroma3.siw.siwmovievendetta.model.Movie;
-import it.uniroma3.siw.siwmovievendetta.model.Review;
 import it.uniroma3.siw.siwmovievendetta.repository.ArtistRepository;
 import it.uniroma3.siw.siwmovievendetta.repository.MovieRepository;
 import it.uniroma3.siw.siwmovievendetta.service.MovieService;

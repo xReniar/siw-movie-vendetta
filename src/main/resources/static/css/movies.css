@@ -2,7 +2,6 @@
     margin-top: 2%;
     margin-left: 10%;
     margin-right: 10%;
-    padding-left: 4%;
 }
 
 .second-nav {
@@ -20,8 +19,6 @@
     align-items: center;
     position: relative;
     max-width: 250px;
-    margin-right: 4%;
-    padding-right: 2%;
 }
 
 .input {
@@ -61,7 +58,7 @@ input:hover {
 .movies {
     display: flex;
     flex-wrap: wrap;
-    gap: 2em;
+    gap: 1.5em;
 }
 
 .card {

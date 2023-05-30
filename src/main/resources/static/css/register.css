@@ -100,3 +100,10 @@ form {
     transform: scale(1.3);
     cursor: pointer;
 }
+
+.image img {
+    width: 100%;
+    border-style:ridge;
+    border-radius: 30px;
+    padding: 8%;
+}

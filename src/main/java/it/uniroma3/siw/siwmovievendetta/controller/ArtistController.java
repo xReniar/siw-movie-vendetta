@@ -73,4 +73,14 @@ public class ArtistController {
         model.addAttribute("acted", artist.getActedMovies());
         return "artist.html";
     }
+
+    @PostMapping("/searchArtist")
+    public String searchMovie(Model model, @RequestParam String name) {
+        if (name.length() == 0) {
+            model.addAttribute("artists", this.artistRepository.findAll());
+        } else {
+            model.addAttribute("artists", this.artistRepository.findByName(name));
+        }
+        return "artists.html";
+    }
 }

@@ -13,12 +13,12 @@ public class Credentials {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotBlank
+    private String username;
+    @NotBlank
     private String password;
     private String role;
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
-    @NotBlank
-    private String username;
 
     public Long getId() {
         return id;

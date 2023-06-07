@@ -66,10 +66,16 @@
     <div class="movie-review-content">
         <div class="personal-review" th:unless="${hasComment}">
             <form th:action="@{'/user/uploadReview/' + ${movie.id}}" method="post" th:object="${review}" class="form">
+                <div th:if="${#fields.hasGlobalErrors()}">
+                    <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+                </div>
                 <input required type="text" placeholder="Title" name="title" th:field="${review.title}" class="form--input1">
+                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
                 <input required type="text" placeholder="Text" name="text" th:field="${review.text}" class="form--input2">
+                <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
                 <div class="review-options">
                     <input required type="number" min="1" max="5" name="rating" th:field="${review.rating}" id="animated-input">
+                    <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
                     <button class="comment-button" type="submit">Commenta</button>
                 </div>
             </form>
@@ -89,7 +95,7 @@
                         <div class="bottom-label">
                             <p th:text="'Rating: ' + ${rev.rating}">.</p>
                             <button th:if="${role != null && role == 'ADMIN'}" class="delete-review">
-                                <a th:href="'/user/deleteReview/' + ${movie.id} + '/' + ${rev.id}" class="log">
+                                <a th:href="'/admin/deleteReview/' + ${movie.id} + '/' + ${rev.id}" class="log">
                                     Delete
                                 </a>
                             </button>

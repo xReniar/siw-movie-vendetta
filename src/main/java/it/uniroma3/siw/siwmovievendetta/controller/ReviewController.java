@@ -33,17 +33,19 @@ public class ReviewController {
     public String newReview(Model model, @Valid @ModelAttribute("review") Review review, BindingResult bindingResult, @PathVariable("movieId") Long id) {
         this.reviewValidator.validate(review,bindingResult);
         Movie movie = this.movieRepository.findById(id).get();
-        if(this.globalController.getUser() != null && !movie.getReviews().contains(review)){
-            review.setAuthor(this.globalController.getUser().getUsername());
-            this.reviewRepository.save(review);
-            movie.getReviews().add(review);
+        if(!bindingResult.hasErrors()){
+            if(this.globalController.getUser() != null && !movie.getReviews().contains(review)){
+                review.setAuthor(this.globalController.getUser().getUsername());
+                this.reviewRepository.save(review);
+                movie.getReviews().add(review);
+            }
         }
         this.movieRepository.save(movie);
 
         return this.movieService.function(model, movie, this.globalController.getUser());
     }
 
-    @GetMapping("/user/deleteReview/{movieId}/{reviewId}")
+    @GetMapping("/admin/deleteReview/{movieId}/{reviewId}")
     public String removeReview(Model model, @PathVariable("movieId") Long movieId,@PathVariable("reviewId") Long reviewId){
         Movie movie = this.movieRepository.findById(movieId).get();
         Review review = this.reviewRepository.findById(reviewId).get();

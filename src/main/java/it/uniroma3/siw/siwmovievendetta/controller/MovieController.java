@@ -81,7 +81,7 @@ public class MovieController {
     public String getMovie(Model model, @PathVariable("movieId") Long id) {
         Movie movie = this.movieRepository.findById(id).get();
 
-        return this.movieService.function(model, movie, globalController.getUser());
+        return this.movieService.function(model, movie, this.globalController.getUser());
     }
 
     @PostMapping("/searchMovie")
